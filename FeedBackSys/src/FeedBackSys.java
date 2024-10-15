@@ -12,25 +12,31 @@ class CommentTooLongException extends Exception
 }
 
 // Feedback Class
-class Feedback
-{
+class Feedback {
     private int rating;
     private String comment;
 
     //Method for verifying submitted feedback
     public Feedback(int rating, String comment) throws CommentTooLongException
     {
-        //Check if rating is withing 1 - 5 range
-        if(rating < 1 || rating > 5)
+        //Check if rating is within 1 - 5 range
+        if (rating < 1 || rating > 5)
         {
-            //Throw error msg
+            //Throw error message
             throw new IllegalArgumentException("Rating must be between 1 and 5.");
         }
 
-        //Check if comment is more than 5 words
-        if(comment.split(" ").length > 5)
+        //Check if comment is empty
+        if (comment == null || comment.trim().isEmpty())
         {
-            //Throw error msg
+            //Throw error message
+            throw new IllegalArgumentException("Comment cannot be empty.");
+        }
+
+        //Check if comment is more than 5 words
+        if (comment.split(" ").length > 5)
+        {
+            // Throw error message
             throw new CommentTooLongException("Comment exceeds word limit of 5.");
         }
 
@@ -38,13 +44,12 @@ class Feedback
         this.rating = rating;
         this.comment = comment;
     }
-
-    //Show submitted feedback
-    public String toString()
-    {
-        return "Rating: " + rating + ", Comment: " + comment;
+        //Show submitted feedback
+        public String toString()
+        {
+            return "Rating: " + rating + ", Comment: " + comment;
+        }
     }
-}
 
 // Main Application Class
 public class FeedBackSys
